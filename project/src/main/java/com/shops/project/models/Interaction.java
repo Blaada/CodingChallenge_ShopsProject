@@ -9,29 +9,27 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.NaturalId;
 
 //Interaction entity : means if a user like or dislike a specific shop it will be saved in this table
 
 @Entity
-@Table(name = "interaction", uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "shop_ip" }))
+@Table(name = "interaction", uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "shop_id" }))
 public class Interaction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	
+	@Column(name = "user_id")
+	private Long user;
 
-	@ManyToOne
-	@JoinColumn(name = "shop_ip")
-	private Shop shop;
+	
+	@Column(name = "shop_id")
+	private Long shop;
 
 	@Enumerated(EnumType.STRING)
 	@NaturalId
@@ -43,7 +41,7 @@ public class Interaction {
 	}
 
 	// Fields constructor
-	public Interaction(Long id, User user, Shop shop, InteractionType interActionType) {
+	public Interaction(Long id, Long user, Long shop, InteractionType interActionType) {
 		super();
 		Id = id;
 		this.user = user;
@@ -60,19 +58,19 @@ public class Interaction {
 		Id = id;
 	}
 
-	public User getUser() {
+	public Long getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Long user) {
 		this.user = user;
 	}
 
-	public Shop getShop() {
+	public Long getShop() {
 		return shop;
 	}
 
-	public void setShop(Shop shop) {
+	public void setShop(Long shop) {
 		this.shop = shop;
 	}
 
