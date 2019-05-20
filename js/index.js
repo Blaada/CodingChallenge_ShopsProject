@@ -3,26 +3,32 @@ postApp.controller('postController', function($scope, $http, $compile) {
 
 	
 	
-	
+	// Show & hide alert message message
     $scope.closeMsg = function() {
         $scope.alertMsg = false;
     };
+	// Return to login page if user is not authenticated
     if ($scope.userName != null) {
         $scope.login_form = false;
         $scope.panel_logged = true;
         $scope.register_form = false;
+		
     } else {
         $scope.login_form = true;
         $scope.panel_logged = false;
         $scope.register_form = false;
 
     }
+	
+	// show register page
     $scope.showRegister = function() {
         $scope.login_form = false;
         $scope.register_form = true;
         $scope.alertMsg = false;
     };
-
+	
+	
+	// show login page function
     $scope.showLogin = function() {
         $scope.register_form = false;
         $scope.login_form = true;
@@ -30,6 +36,7 @@ postApp.controller('postController', function($scope, $http, $compile) {
         $scope.alertMsg = false;
     };
 	
+	// logout function 
 	$scope.logout = function() {
         $http({
                 method: 'post',
@@ -56,6 +63,7 @@ postApp.controller('postController', function($scope, $http, $compile) {
 			});
     };
 	
+	// Function triggered when user like a shop
 	$scope.likedShop = function(event) {
         $http({
                 method: 'post',
@@ -79,6 +87,31 @@ postApp.controller('postController', function($scope, $http, $compile) {
 			});
     };
 	
+	// Function triggered when user dislike a shop
+	$scope.dislikedShop = function(event) {
+        $http({
+                method: 'post',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+                    "Authorization": $scope.TType + " " + $scope.Token
+                },
+                url: 'http://localhost:9090/interaction/disliked',
+				data: 'email=' + $scope.userName + '&shop_id=' + event.target.id
+            })
+            .success(function(data) {
+
+                $scope.alertMsg = true;
+                $scope.alertMessage = "Shop disliked";
+
+            })
+			.error(function(err) {
+				$scope.alertMsg = true;
+				
+                $scope.alertMessage = err.message;
+			});
+    };
+	
+	// Function triggered when user remove like to a specific shop
 	$scope.removeLiked = function(event) {
         $http({
                 method: 'post',
@@ -102,6 +135,8 @@ postApp.controller('postController', function($scope, $http, $compile) {
 			});
     };
 	
+	
+	// Submit the register and save the user to database
     $scope.submitRegister = function() {
 
         $http({
@@ -125,6 +160,7 @@ postApp.controller('postController', function($scope, $http, $compile) {
 			});
     };
 
+	// check the user creditials and authenticate usin spring secrity and JWT token
     $scope.submitLogin = function() {
 
         $http({
@@ -155,7 +191,7 @@ postApp.controller('postController', function($scope, $http, $compile) {
             });
         });
     }
-
+			listShop();
             })
 			.error(function(err) {
 				
@@ -247,7 +283,7 @@ postApp.controller('postController', function($scope, $http, $compile) {
 	
 	
 	
-	/* Get the list of shops sorted by distance between client and shops*/
+	/* Get the list of liked shops sorted by distance between client and shops*/
 	 $http({
                 method: 'post',
                 headers: {
