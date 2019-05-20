@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Nearby Shops</title>
+  
+  
+  <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel='stylesheet' href='css/style.css'>
+  
+  
+</head>
+
+<body>
+	<div>
+  <div class="container" ng-app="postApp" ng-controller="postController">
+<div class="alert {{alertClass}} alert-dismissible" ng-show="alertMsg">
+    <a href="#" class="close" ng-click="closeMsg()" aria-label="close">&times;</a>
+    {{alertMessage}}
+   </div>
+
+   <div class="panel panel-default" ng-show="login_form">
+    <div class="panel-heading">
+     <h3 class="panel-title">Login</h3>
+    </div>
+    <div class="panel-body">
+     <form method="post" ng-submit="submitLogin()">
+      <div class="form-group">
+       <label>Enter Your Email</label>
+       <input type="text" name="email" ng-model="loginData.email" class="form-control" />
+      </div>
+      <div class="form-group">
+       <label>Enter Your Password</label>
+       <input type="password" name="password" ng-model="loginData.password" class="form-control" />
+      </div>
+      <div class="form-group" align="center">
+       <input type="submit" name="login" class="btn btn-primary" value="Login" />
+       <br />
+       <input type="button" name="register_link" class="btn btn-primary btn-link" ng-click="showRegister()" value="Register" />
+      </div>
+     </form>
+    </div>
+   </div>
+
+   <div class="panel panel-default" ng-show="register_form">
+    <div class="panel-heading">
+     <h3 class="panel-title">Register</h3>
+    </div>
+    <div class="panel-body">
+     <form method="post" ng-submit="submitRegister()">
+      
+      <div class="form-group">
+       <label>Enter Your Email</label>
+       <input type="text" name="email" ng-model="registerData.email" class="form-control" />
+      </div>
+      <div class="form-group">
+       <label>Enter Your Password</label>
+       <input type="password" name="password" ng-model="registerData.password" class="form-control" />
+      </div>
+      <div class="form-group" align="center">
+       <input type="submit" name="register" class="btn btn-primary" value="Register" />
+       <br />
+       <input type="button" name="login_link" class="btn btn-primary btn-link" ng-click="showLogin()" value="Login" />
+      </div>
+     </form>
+    </div>
+   </div>
+ 
+   <div class="panel panel-default" ng-show="panel_logged">
+    <div class="panel-heading">
+     <h3 class="panel-title">Welcome - <strong>{{userName}}</strong></h3>
+	 <br/><br/>
+	 <button type="button" ng-click="listShop()" class="btn btn-primary">Show all shops</button>
+	 <button type="button" ng-click="listLikedShop()" class="btn btn-primary">Liked shops</button>
+	 <button type="button" ng-click="logout()" class="btn btn-danger">Logout</button>
+    </div>
+    <div class="panel-body">
+     <div class="row" id="you"> </div>
+        </div>
+    </div>
+    </div>
+   </div>
+   
+
+</div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
