@@ -42,8 +42,8 @@ public class InterAction_Controller {
 	public void removeLiked(@RequestParam(value = "email") String email,
 			@RequestParam(value = "shop_id") String shop_id) {
 		
-		Interaction interAct = new Interaction(getIdfromUsername(email), Long.valueOf(shop_id), "LIKED");
-		interAction_repo.delete(interAct);
+		
+		interAction_repo.deleteInterActionByUserShopId(Long.valueOf(shop_id), getIdfromUsername(email));
 	}
 	
 	public Long getIdfromUsername(String email) {

@@ -1,7 +1,7 @@
 package com.shops.project.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,13 +84,7 @@ public class Authentication_Controller {
 	}
 	
 	
-	@RequestMapping("/logout")
-	public ResponseEntity<?> registerUser(HttpServletRequest request){
-		SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
-		request.getSession().invalidate();
-		
-		return new ResponseEntity<>(new ResponseMessage("User logged out successfully"), HttpStatus.OK);
-	}
+	
 	
 	
 	
