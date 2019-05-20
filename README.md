@@ -33,16 +33,16 @@ HTML
 ```
 ## Functional spec covered by this app
 
-*A User can sign up using his email & password
-*A User can sign in using his email & password
-*A User can display the list of shops sorted by distance
-*A User can like a shop, so it can be added to his preferred shops
-**liked shops shouldn’t be displayed on the main page
-*A User can display the list of preferred shops
-*A User can remove a shop from his preferred shops list
+* A User can sign up using his email & password.
+* A User can sign in using his email & password.
+* A User can display the list of shops sorted by distance.
+* A User can like a shop, so it can be added to his preferred shops.
+** liked shops shouldn’t be displayed on the main page.
+* A User can display the list of preferred shops.
+* A User can remove a shop from his preferred shops list.
 
 ## Functional spec not covered by this app
 
-*As a User, I can dislike a shop, so it won’t be displayed within “Nearby Shops” list during the next 2 hours
+* As a User, I can dislike a shop, so it won’t be displayed within “Nearby Shops” list during the next 2 hours.
 ** i had the idea to use " $interval ", and failed in some tests, and also run out of time but will fix it in future release.
 
