@@ -15,5 +15,8 @@ public interface ShopRepository extends JpaRepository<Shop, Long>{
 	
 	@Query(value = "SELECT * FROM shop WHERE shop.shop_id NOT IN (SELECT shop_id FROM interaction WHERE interaction.user_id=:USER)",nativeQuery = true)
 	List<Shop> findAllShops(@Param("USER") Long user_id);
+	
+	@Query(value = "SELECT * FROM shop WHERE shop.shop_id IN (SELECT shop_id FROM interaction WHERE interaction.user_id=:USER and interaction.inter_action_type='LIKED')",nativeQuery = true)
+	List<Shop> findAllLikedShops(@Param("USER") Long user_id);
 
 }
