@@ -2,16 +2,15 @@ package com.shops.project.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-import org.hibernate.annotations.NaturalId;
+
 
 //Interaction entity : means if a user like or dislike a specific shop it will be saved in this table
 
@@ -31,19 +30,18 @@ public class Interaction {
 	@Column(name = "shop_id")
 	private Long shop;
 
-	@Enumerated(EnumType.STRING)
-	@NaturalId
+	@NotNull
 	@Column(length = 50)
-	private InteractionType interActionType; // ( Liked shop ) OR ( DisLiked shop )
+	private String interActionType; // ( Liked shop ) OR ( DisLiked shop )
 
 	public Interaction() {
 
 	}
 
 	// Fields constructor
-	public Interaction(Long id, Long user, Long shop, InteractionType interActionType) {
+	public Interaction(Long user, Long shop, String interActionType) {
 		super();
-		Id = id;
+		
 		this.user = user;
 		this.shop = shop;
 		this.interActionType = interActionType;
@@ -74,11 +72,11 @@ public class Interaction {
 		this.shop = shop;
 	}
 
-	public InteractionType getInterActionType() {
+	public String getInterActionType() {
 		return interActionType;
 	}
 
-	public void setInterActionType(InteractionType interActionType) {
+	public void setInterActionType(String interActionType) {
 		this.interActionType = interActionType;
 	}
 
