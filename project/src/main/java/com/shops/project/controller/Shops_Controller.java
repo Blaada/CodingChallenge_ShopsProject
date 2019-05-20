@@ -1,6 +1,6 @@
 package com.shops.project.controller;
 
-import java.util.Collections;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,13 +43,29 @@ public class Shops_Controller {
 			Shop_distance shop_distance = new Shop_distance(shop, distance);
 			shops_by_distance.add(shop_distance);
 		}
-		Collections.sort(shops_by_distance);
-		for (Shop_distance shopd : shops_by_distance) {
-			System.out.println(shopd.getDistance_to_client());
-		}
+		
 		return shops_by_distance;
 
 	}
+	
+	@RequestMapping(value = "/allLiked")
+	public List<Shop_distance> getAllLikedShops(@RequestParam(value = "longitude_Client") String longitude_Client,
+			@RequestParam(value = "latitude_Client") String latitude_Client,
+			@RequestParam(value = "email") String email, HttpServletRequest request) {
+		LinkedList<Shop_distance> shops_by_distance = new LinkedList<Shop_distance>();
+		Double latitude = Double.valueOf(latitude_Client);
+		Double longitude = Double.valueOf(longitude_Client);
+		for (Shop shop : shop_repo.findAllLikedShops(getIdfromUsername(email))) {
+			Double distance = distance(latitude, shop.getLatShop_coordinates(), longitude,
+					shop.getLongShop_coordinates());
+			Shop_distance shop_distance = new Shop_distance(shop, distance);
+			shops_by_distance.add(shop_distance);
+		}
+		
+		return shops_by_distance;
+
+	}
+	
 
 	public static double distance(double lat1, double lat2, double lon1, double lon2) {
 
@@ -62,10 +78,14 @@ public class Shops_Controller {
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		double distance = R * c * 1000; // convert to meters
 
+		
+		// return distance between Shop and Client
 		return Math.sqrt(distance);
 	}
 
 	public Long getIdfromUsername(String email) {
+		
+		// return the Id of the authenticated user 
 		return userRepository.findByEmail(email).get().getId();
 
 	}
